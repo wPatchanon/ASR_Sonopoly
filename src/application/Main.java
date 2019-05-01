@@ -23,7 +23,7 @@ public class Main extends Application {
 		SCREEN_HEIGHT = screenBound.getHeight();
 		
 		HEIGHT = Math.min(0.75 * SCREEN_HEIGHT, 0.6 * SCREEN_WIDTH);
-		WIDTH = HEIGHT * 1.35;
+		WIDTH = HEIGHT * 1.4;
 	}
 	
 	@Override
@@ -35,9 +35,11 @@ public class Main extends Application {
 		StackPane leftPane = new StackPane();
 		
 		BoardPane boardPane = GamePaneManager.getInstance().getBoardPane();
+		PositionPane positionPane = GamePaneManager.getInstance().getPositionPane();
 		Terminal terminal = GamePaneManager.getInstance().getTerminal();
 		
 		leftPane.getChildren().add(boardPane);
+		leftPane.getChildren().add(positionPane);
 		leftPane.getChildren().add(terminal);
 		
 		InformationPane informationPane = GamePaneManager.getInstance().getInformationPane();

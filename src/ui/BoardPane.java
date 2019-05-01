@@ -2,6 +2,7 @@ package ui;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -9,7 +10,10 @@ import application.Main;
 
 public class BoardPane extends GridPane {
 	public static final int SIDE = 7;
+	public static final int TOTAL_CELL = 4 * SIDE + 4;
 	public static final double CELL_WIDTH = Main.HEIGHT / (SIDE + 4);
+	
+	private BoardCell[] cellArray;
 	
 	public BoardPane () {
 		getColumnConstraints().add(new ColumnConstraints(2 * CELL_WIDTH));
@@ -30,12 +34,36 @@ public class BoardPane extends GridPane {
 	}
 	
 	private void addDefaultCell () {
+		cellArray = new BoardCell[4*SIDE + 4];
+		
 		for (int i = 0; i < 4 * SIDE; ++i) {
-			BoardCell boardCell = new BoardCell(i / SIDE, i, (new Integer(i + 1)).toString());
-			boardCell.setOwner(i / SIDE);
+			BoardCell boardCell;
+			
+			if (i % SIDE == 0) {
+				boardCell = new BoardCell(i / SIDE);
+				
+				GridPane.setHalignment(boardCell, HPos.CENTER);
+				GridPane.setValignment(boardCell, VPos.CENTER);
+				GridPane.setMargin(boardCell, new Insets(0));
+				
+				if (i / SIDE == 0) {
+					add(boardCell, SIDE + 1, SIDE + 1);
+				} else if (i / SIDE == 1) {
+					add(boardCell, 0, SIDE + 1);
+				} else if (i / SIDE == 2) {
+					add(boardCell, 0, 0);
+				} else {
+					add(boardCell, SIDE + 1, 0);
+				}
+				
+				cellArray[i + i / SIDE] = boardCell;
+			}
+			
+			boardCell = new BoardCell(i, i / SIDE);
 			
 			GridPane.setHalignment(boardCell, HPos.CENTER);
 			GridPane.setValignment(boardCell, VPos.CENTER);
+			GridPane.setMargin(boardCell, new Insets(0));
 			
 			if (i < SIDE) {
 				add(boardCell, SIDE - i, SIDE + 1);
@@ -46,6 +74,8 @@ public class BoardPane extends GridPane {
 			} else {
 				add(boardCell, SIDE + 1, 1 + (i - 3 * SIDE));
 			}
+			
+			cellArray[i + i / SIDE + 1] = boardCell;
 		}
 	}
 }
