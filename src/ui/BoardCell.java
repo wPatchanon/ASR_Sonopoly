@@ -1,7 +1,5 @@
 package ui;
 
-import java.util.Random;
-
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,8 +26,6 @@ public class BoardCell extends Canvas {
 	private boolean corner;
 	private int cellId;
 	private int cornerType;
-	private int owner;
-	private int assetLevel;		// 0 - Land | 1 - House | 2 - Hotel | 3 - Landmark
 	
 	static {
 		COLOR = new Color[] {
@@ -63,10 +59,6 @@ public class BoardCell extends Canvas {
 	public BoardCell (int cellId, int cellOrientation) {
 		this.cellId = cellId;
 		this.corner = false;
-//		this.owner = 4;
-		this.owner = (new Random()).nextInt(4);
-//		this.assetLevel = 0;
-		this.assetLevel = (new Random()).nextInt(4);
 		
 		width = BoardPane.CELL_WIDTH;
 		height = 2 * BoardPane.CELL_WIDTH;
@@ -109,6 +101,10 @@ public class BoardCell extends Canvas {
 	}
 	
 	public void drawCell () {
+		int logicCellId = 1 + cellId + cellId / BoardPane.SIDE;
+		int owner = GameLogic.getInstance().getOwner(logicCellId);
+		int assetLevel = GameLogic.getInstance().getAssetLevel(logicCellId);
+		
 		gc.setFill(Color.gray(0.9));
 		gc.fillRect(0, 0, width, height);
 		
@@ -142,14 +138,8 @@ public class BoardCell extends Canvas {
 		gc.drawImage(IMAGE[cornerType], 0, 0, width,  height);
 		
 		if (GameLogic.getInstance().getPlayerAtPosition(cornerType * BoardPane.SIDE + cornerType).size() > 0) {
-//			gc.setFill(Color.rgb(0, 0, 0, 0.75));
 			gc.setFill(Color.rgb(255, 255, 255, 0.5));
 			gc.fillRect(0, 0, width, height);
 		}
-	}
-	
-	public void setOwner (int owner) {
-		this.owner = owner;
-		draw();
 	}
 }

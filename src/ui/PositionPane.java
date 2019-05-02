@@ -12,7 +12,7 @@ import logic.GameLogic;
 public class PositionPane extends Canvas {
 	private static final Image[] IMAGE;
 	private static final double ICON_WIDTH = BoardPane.CELL_WIDTH / 4;
-	private static final double  ICON_HEIGHT = BoardPane.CELL_WIDTH / 2;
+	private static final double ICON_HEIGHT = 2 * BoardPane.CELL_WIDTH / 5;
 	
 	private GraphicsContext gc;
 	

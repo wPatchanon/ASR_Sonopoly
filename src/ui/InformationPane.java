@@ -46,6 +46,10 @@ public class InformationPane extends Canvas {
 		gc.drawImage(Terminal.LOGO, 3 * WIDTH / 10, WIDTH / 10, 2 * WIDTH / 5, 2 * WIDTH / 5);
 		
 		for (int i = 0; i < 4; ++i) {
+			if (GameLogic.getInstance().hasLost(i)) {
+				continue;
+			}
+			
 			if (GameLogic.getInstance().getPlayerMap(i) == 4) {
 				continue;
 			}

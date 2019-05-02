@@ -18,4 +18,8 @@ public class Utility {
 		
 		return output;
 	}
+	
+	public static int roundTen (double number) {
+		return (int) Math.round(Math.ceil(number / 10)) * 10;
+	}
 }

@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.geometry.Insets;
@@ -13,7 +14,7 @@ public class BoardPane extends GridPane {
 	public static final int TOTAL_CELL = 4 * SIDE + 4;
 	public static final double CELL_WIDTH = Main.HEIGHT / (SIDE + 4);
 	
-	private BoardCell[] cellArray;
+	private BoardCell[] boardCellArray;
 	
 	public BoardPane () {
 		getColumnConstraints().add(new ColumnConstraints(2 * CELL_WIDTH));
@@ -34,7 +35,7 @@ public class BoardPane extends GridPane {
 	}
 	
 	private void addDefaultCell () {
-		cellArray = new BoardCell[4*SIDE + 4];
+		boardCellArray = new BoardCell[4*SIDE + 4];
 		
 		for (int i = 0; i < 4 * SIDE; ++i) {
 			BoardCell boardCell;
@@ -56,7 +57,7 @@ public class BoardPane extends GridPane {
 					add(boardCell, SIDE + 1, 0);
 				}
 				
-				cellArray[i + i / SIDE] = boardCell;
+				boardCellArray[i + i / SIDE] = boardCell;
 			}
 			
 			boardCell = new BoardCell(i, i / SIDE);
@@ -75,7 +76,13 @@ public class BoardPane extends GridPane {
 				add(boardCell, SIDE + 1, 1 + (i - 3 * SIDE));
 			}
 			
-			cellArray[i + i / SIDE + 1] = boardCell;
+			boardCellArray[i + i / SIDE + 1] = boardCell;
+		}
+	}
+	
+	public void update () {
+		for (BoardCell each: boardCellArray) {
+			Platform.runLater(() -> each.draw());
 		}
 	}
 }
