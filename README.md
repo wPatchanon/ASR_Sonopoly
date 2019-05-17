@@ -3,8 +3,8 @@
 ## Setup
   1. Download Asr model from https://github.com/wPatchanon/ASR_deploy.
   2. Run model and start server with Gstreamer.
-  3. Open project with your editor.
-  4. Set the path of a recording file in **src/Listener/JavaSoundRecoder.java** and **src/Listener/Decoder.java** (Same path)
+  3. Open code project with your editor.
+  4. Set the path of a recording file in **src/Listener/JavaSoundRecorder.java** and **src/Listener/Decoder.java** (Same path)
   5. Set Gstream server URL in **src/Listener/Decoder.java**
   6. Run program.
 
