@@ -38,8 +38,7 @@ public class GameLogic {
 		playerMap = new int[] {4, 4, 4, 4};
 		
 		hasLost = new boolean[] {false, false, false, false};
-//		position = new int[4];
-		position = new int[] {23, 23, 23, 23};
+		position = new int[4];
 		stop = new int[4];
 		money = new int[] {3000, 3000, 3000, 3000};
 		
@@ -242,6 +241,11 @@ public class GameLogic {
 	}
 	
 	public void changeTurn () {
+		if (gameStatus != 1 && gameStatus != 3 && gameStatus != 5 && gameStatus != 2) {
+			return;
+		}
+		
+		System.out.println("Change Turn");
 		GamePaneManager.getInstance().getTerminal().setAction(false);
 		
 		int survivor = 0;

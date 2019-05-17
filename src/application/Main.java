@@ -1,5 +1,6 @@
 package application;
 	
+import Listener.Listener_v2;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.StackPane;
@@ -7,8 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
+import javafx.scene.input.KeyCode;
 import ui.*;
+import util.KeyMap;
 
 public class Main extends Application {
 	private static final double SCREEN_WIDTH;
@@ -16,6 +18,9 @@ public class Main extends Application {
 	
 	public static final double WIDTH;
 	public static final double HEIGHT;
+	
+	private boolean recording;
+	private int command;
 	
 	static {
 		Rectangle2D screenBound = Screen.getPrimary().getBounds();
@@ -50,6 +55,22 @@ public class Main extends Application {
 		root.getChildren().add(gamePane);
 		
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
+		
+		recording = false;
+		scene.setOnKeyPressed(event -> {
+			System.out.println("IN");
+			if (event.getCode().equals(KeyCode.SPACE)) {
+				if (!recording) {
+					Listener_v2.getInstance().start();
+				} else {
+					command = Listener_v2.getInstance().stop();
+					KeyMap.operate(command);
+				}
+				
+				recording = !recording;
+			}
+		});
+		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("GOWAJEE Monopoly - ASR Project");
 		primaryStage.setResizable(false);

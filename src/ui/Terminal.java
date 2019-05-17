@@ -7,6 +7,7 @@ import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -15,7 +16,9 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
+import Listener.Listener_v2;
 import logic.GameLogic;
+import util.KeyMap;
 import util.Utility;
 
 public class Terminal extends Canvas {
@@ -259,8 +262,8 @@ public class Terminal extends Canvas {
 		timeline.play();
 		
 		timeline.setOnFinished(event -> {
-//			GameLogic.getInstance().walk(firstDiceSide + secondDiceSide);
-			GameLogic.getInstance().walk(1);
+			GameLogic.getInstance().walk(firstDiceSide + secondDiceSide);
+//			GameLogic.getInstance().walk(1);
 		});
 	}
 	
@@ -462,7 +465,7 @@ public class Terminal extends Canvas {
 				if (cellId != BoardPane.SIDE + 1) {
 					GameLogic.getInstance().setGameStatus(3);
 				} else {
-					GameLogic.getInstance().setGameStatus(6);
+					GameLogic.getInstance().setGameStatus(2);
 				}
 			}
 			
@@ -538,6 +541,10 @@ public class Terminal extends Canvas {
 	
 	public boolean hasRolled () {
 		return hasRolled;
+	}
+	
+	public boolean actionDone () {
+		return actionDone;
 	}
 	
 	public boolean chooseColor () {

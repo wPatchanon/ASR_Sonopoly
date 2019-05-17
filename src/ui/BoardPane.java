@@ -4,10 +4,13 @@ import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.geometry.Insets;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import application.Main;
+import Listener.Listener_v2;
+import util.KeyMap;
 
 public class BoardPane extends GridPane {
 	public static final int SIDE = 7;
