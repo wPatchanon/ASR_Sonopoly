@@ -1,4 +1,5 @@
 # ASR_Sonopoly
+Project in ASR class
 
 ## Setup
   1. Download Asr model from https://github.com/wPatchanon/ASR_deploy.
